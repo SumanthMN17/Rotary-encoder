@@ -22,8 +22,8 @@ pinMode(ENCA1,INPUT);
 pinMode(ENCB1,INPUT);
 pinMode(ENCA2,INPUT);
 pinMode(ENCB2,INPUT);
-attachInterrupt(digitalPinToInterrupt(ENCA1),readEncoder,RISING); // this will trigered when encoder channel A is raised or motor rotated in motor 1
-attachInterrupt(digitalPinToInterrupt(ENCA2),readEncoder,RISING); // this will trigered when encoder channel A is raised or motor rotated in motor 2
+attachInterrupt(digitalPinToInterrupt(ENCA1),readEncoder1,RISING); // this will trigered when encoder channel A is raised or motor rotated in motor 1
+attachInterrupt(digitalPinToInterrupt(ENCA2),readEncoder2,RISING); // this will trigered when encoder channel A is raised or motor rotated in motor 2
 pinMode(PWM1,OUTPUT);
 pinMode(PWM2,OUTPUT);
 pinMode(IN1,OUTPUT);
@@ -130,19 +130,22 @@ digitalWrite(in2,LOW);
 }  
 }
 
-void readEncoder(){
-int b = digitalRead(ENCB1);
+// for 1st motor
+void readEncoder1(){  
+  int b = digitalRead(ENCB1);
 if(b > 0){
-posi1++;
+posi2++;
 }
 else{
-posi1--;
-}
+posi2--;
+}}
+
+// for 2nd motor
+void readEncoder2(){
 int c = digitalRead(ENCB2);
 if(c > 0){
 posi2++;
 }
 else{
 posi2--;
-}
-}
+}}
